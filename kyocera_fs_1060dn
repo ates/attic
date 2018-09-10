@@ -1,0 +1,11 @@
+sudo mv /usr/lib/cups/filter/rastertokpsl /usr/lib/cups/filter/rastertokpsl.orig
+
+cat > /usr/lib/cups/filter/rastertokpsl << EOF
+#!/bin/bash
+
+set -- "${@:1:2}" "$RANDOM.${3##*.}" "${@:4}"
+
+/usr/lib/cups/filter/rastertokpsl.orig "$@"
+EOF
+
+chmod +x /usr/lib/cups/filter/rastertokpsl
